@@ -36,7 +36,20 @@ function App() {
     console.log(hamster)
     await createHamster(hamster)
   }
-
+  const [_hamster, setHamster] = useState({
+    name: "",
+    description: "",
+    breed: "",
+    image: "",
+    cuteness: 0    
+  })
+  const inputHandler = event => {
+    setHamster(state=>({
+      ...state,
+      [event.target.name]: event.target.value
+    }))
+  }
+  console.log(_hamster)
 
 
   {/* id: 1,
@@ -52,7 +65,7 @@ function App() {
      {JSON.stringify(hamsters)}
      <form onSubmit={handleSubmit}>
       <label htmlFor="name">Name</label>
-      <input type="text" placeholder="name" name="name" defaultValue="nameform" />
+      <input type="text" placeholder="name" name="name" defaultValue="nameform" onChange={inputHandler}/>
       <label>
         Description
         <input type="text" placeholder="description" name="description" defaultValue="desform"/>
