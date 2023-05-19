@@ -44,10 +44,16 @@ function App() {
     cuteness: 0    
   })
   const inputHandler = event => {
-    setHamster(state=>({
+    setHamster(state=>{
+      if (event.target.value.length > 10) {
+        window.alert("max 10")
+        return state
+      }
+      return{
       ...state,
       [event.target.name]: event.target.value
-    }))
+      }
+    })
   }
   console.log(_hamster)
 
