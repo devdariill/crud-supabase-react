@@ -67,28 +67,22 @@ function App() {
   cuteness: 1 */}
 
   return (
-    <main>
-     {JSON.stringify(hamsters)}
-     <form onSubmit={handleSubmit}>
+    <main className="h-full flex py-20 flex-col mx-10 gap-y-10 w-screen justify-center">
+    <div className="w-full items-center justify-center flex flex-col gap-y-5
+    ">
+     <form onSubmit={handleSubmit} className="max-w-sm grid grid-cols-2 [&>label>input]:p-2 gap-5 [&>input]:p-2 items-center justify-center px-3 [&>*]:rounded-md">
       <label htmlFor="name">Name</label>
-      <input type="text" placeholder="name" name="name" defaultValue="nameform" onChange={inputHandler}/>
-      <label>
-        Description
-        <input type="text" placeholder="description" name="description" defaultValue="desform"/>
-      </label>
-      <label>
-        Breed
-        <input type="text" placeholder="breed" name="breed" defaultValue="breedform"/>
-      </label>
+      <input type="text" placeholder="name" name="name" id="name" defaultValue="nameform" onChange={inputHandler}/>
       <label htmlFor="image" >Image</label>
-      <input type="text" placeholder="image" name="image" defaultValue="imgform"/>
-      <label>
-        Cuteness
-        <input type="number" placeholder="cuteness" name="cuteness" defaultValue="6"/>
-      </label>
-      <button>Enviar</button>
+      <input type="text" placeholder="image" name="image" id="image" defaultValue="imgform"/>
+      <label htmlFor="cuteness">Cuteness</label>
+      <input type="number" placeholder="cuteness" id="cuteness" name="cuteness" defaultValue="6"/>
+      <label>Description</label>
+      <input type="text" placeholder="description" name="description" defaultValue="desform"/>
+      <label>Breed</label>
+      <input type="text" placeholder="breed" name="breed" defaultValue="breedform"/>
+      <button className="block w-full col-span-2" >Enviar</button>
      </form>
-
      <button onClick={()=>createHamster({
         name: "8afor",
         description: "8des afor",
@@ -98,16 +92,19 @@ function App() {
      })}>Create Hamster</button>
      {[...hamsters].reverse().map((item) => {
         return (
-          <div key={item.id}>
+          <div key={item.id} className="relative w-full text-center max-w-screen-sm">
+            <button onClick={()=> console.log("delete")} className="absolute top-2 right-2 bg-red-500 px-2 rounded-full py-0.5 items-center justify-center text-center">X</button>
             <h1>{item.name}</h1>
             <p>{item.description}</p>
             <p>{item.breed}</p>
             <p>{item.cuteness}</p>
-            <img src={item.image} alt={item.name} />
+            {!item.image.length>0 && <img src={item.image} alt={item.name} />}
           </div>
         )
         })
       }
+    </div>
+
    </main>
   )
 }
