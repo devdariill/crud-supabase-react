@@ -23,23 +23,24 @@ function App() {
   },[])
 
   {/* id: 1,
-created_at: '2023-05-19T04:18:21.758133+00:00',
-name: 'afor',
-description: 'des afor',
-breed: 'breed',
-image: 'image1.png',
-cuteness: 1 */}
+  created_at: '2023-05-19T04:18:21.758133+00:00',
+  name: 'afor',
+  description: 'des afor',
+  breed: 'breed',
+  image: 'image1.png',
+  cuteness: 1 */}
 
   return (
-    <main >
+    <main>
      {JSON.stringify(hamster)}
-     {hamster.map((item, index) => {
+     {hamster.map((item) => {
         return (
-          <div key={index}>
+          <div key={item.id}>
             <h1>{item.name}</h1>
-            <p>{item.age}</p>
-            <p>{item.favFood}</p>
-            <p>{item.loves}</p>
+            <p>{item.description}</p>
+            <p>{item.breed}</p>
+            <p>{item.cuteness}</p>
+            <img src={item.image} alt={item.name} />
           </div>
         )
         })
