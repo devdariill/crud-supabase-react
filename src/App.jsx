@@ -65,6 +65,13 @@ function App() {
     getHamsters()
   }
 
+  // clousure function save the value of the variable in the moment of the creation of the function
+  const clousureDelete= id =>{
+    return async () => {
+      await deleteHamster(id)
+    }
+  }
+
   const handleUpdate = async event => {
     event.preventDefault()
     const form = event.currentTarget
@@ -130,7 +137,7 @@ function App() {
      {[...hamsters].reverse().map((item) => {
         return (
           <div key={item.id} className="relative w-full text-center max-w-screen-sm">
-            <button onClick={()=>deleteHamster(item.id)} type="button" className="absolute top-2 right-2 bg-red-500 px-2 rounded-full py-0.5 items-center justify-center text-center">X</button>
+            <button onClick={clousureDelete(item.id)} type="button" className="absolute top-2 right-2 bg-red-500 px-2 rounded-full py-0.5 items-center justify-center text-center">X</button>
             <h1>{item.name}</h1>
             <p>{item.description}</p>
             <p>{item.breed}</p>
