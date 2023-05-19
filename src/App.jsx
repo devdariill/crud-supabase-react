@@ -27,6 +27,15 @@ function App() {
     if (res.error) { console.log(res.error) , window.alert("error create")}
     getHamsters()
   }
+  const handleSubmit = async event => {
+    event.preventDefault()
+    const form = event.currentTarget
+    console.log(form)
+    const formData = new FormData(form)
+    console.log(formData)
+    const hamster = Object.fromEntries(formData.entries())
+    console.log(hamster)
+  }
 
   {/* id: 1,
   created_at: '2023-05-19T04:18:21.758133+00:00',
@@ -39,6 +48,26 @@ function App() {
   return (
     <main>
      {JSON.stringify(hamster)}
+     <form onSubmit={handleSubmit}>
+      <label htmlFor="name">Name</label>
+      <input type="text" placeholder="name" name="name" value="nameform"/>
+      <label>
+        Description
+        <input type="text" placeholder="description" name="description" value="desform"/>
+      </label>
+      <label>
+        Breed
+        <input type="text" placeholder="breed" name="breed" value="breedform"/>
+      </label>
+      <label htmlFor="image" >Image</label>
+      <input type="text" placeholder="image" name="image" value="imgform"/>
+      <label>
+        Cuteness
+        <input type="number" placeholder="cuteness" name="cuteness" value="6"/>
+      </label>
+      <button>Enviar</button>
+     </form>
+
      <button onClick={()=>createHamster({
         name: "8afor",
         description: "8des afor",
