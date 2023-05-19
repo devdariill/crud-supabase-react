@@ -108,17 +108,17 @@ function App() {
     <div className="w-full items-center justify-center flex flex-col gap-y-5
     ">
      <form onSubmit={handleSubmit} className="max-w-sm grid grid-cols-2 [&>label>input]:p-2 gap-5 [&>input]:p-2 items-center justify-center px-3 [&>*]:rounded-md">
-      <label htmlFor="name">Name</label>
-      <input type="text" placeholder="name" name="name" id="name" defaultValue="nameform" onChange={inputHandler}/>
-      <label htmlFor="image" >Image</label>
-      <input type="text" placeholder="image" name="image" id="image" defaultValue="imgform"/>
-      <label htmlFor="cuteness">Cuteness</label>
-      <input type="number" placeholder="cuteness" id="cuteness" name="cuteness" defaultValue="6"/>
-      <label>Description</label>
-      <input type="text" placeholder="description" name="description" defaultValue="desform"/>
-      <label>Breed</label>
-      <input type="text" placeholder="breed" name="breed" defaultValue="breedform"/>
-      <button className="block w-full col-span-2" >Enviar</button>
+        <label htmlFor="name">Name</label>
+        <input type="text" placeholder="name" name="name" id="name" defaultValue="nameform" onChange={inputHandler}/>
+        <label htmlFor="image" >Image</label>
+        <input type="text" placeholder="image" name="image" id="image" defaultValue="imgform"/>
+        <label htmlFor="cuteness">Cuteness</label>
+        <input type="number" placeholder="cuteness" id="cuteness" name="cuteness" defaultValue="6"/>
+        <label>Description</label>
+        <input type="text" placeholder="description" name="description" defaultValue="desform"/>
+        <label>Breed</label>
+        <input type="text" placeholder="breed" name="breed" defaultValue="breedform"/>
+        <button className="block w-full col-span-2" >Enviar</button>
      </form>
      <button onClick={()=>createHamster({
         name: "8afor",
