@@ -65,6 +65,36 @@ function App() {
     getHamsters()
   }
 
+  const handleUpdate = async event => {
+    event.preventDefault()
+    const form = event.currentTarget
+    console.log(form)
+    const formData = new FormData(form)
+    const hamster = Object.fromEntries(formData.entries())
+    console.log(hamster)
+    const {id, ...rest} = hamster
+    const res = await supabase.from(HAMSTERS).update(rest).match({id})
+    if (res.error) { console.log(res.error) , window.alert("error update")}
+    getHamsters()    
+    setHamster({
+      name: "",
+      description: "",
+      breed: "",
+      image: "",
+      cuteness: 0
+    })
+  }
+
+  const getHamster = async id => {
+    console.log(id)
+    console.log("get")
+    const res = await supabase.from(HAMSTERS).select("*").match({id})
+    if (res.error) { console.log(res.error) , window.alert("error get")}
+    console.log(res)
+    setHamster(res.data[0])
+  }
+
+
   {/* id: 1,
   created_at: '2023-05-19T04:18:21.758133+00:00',
   name: 'afor',
@@ -105,11 +135,29 @@ function App() {
             <p>{item.description}</p>
             <p>{item.breed}</p>
             <p>{item.cuteness}</p>
-            {!item.image.length>0 && <img src={item.image} alt={item.name} />}            
+            {!item.image.length>0 && <img src={item.image} alt={item.name} />}
+            <button type="button" onClick={()=>getHamster(item.id)}>Edit</button>
           </div>
         )
         })
       }
+      
+      { hamster.name && (
+        <form onSubmit={handleUpdate} className="max-w-sm grid grid-cols-2 [&>label>input]:p-2 gap-5 [&>input]:p-2 items-center justify-center px-3 [&>*]:rounded-md">
+          <input type="text" name="id" value={hamster.id} hidden/>
+          <label htmlFor="name">Name</label>
+          <input type="text" placeholder="name" name="name" id="name"  defaultValue={hamster.name}/>
+          <label htmlFor="image" >Image</label>
+          <input type="text" placeholder="image" name="image" id="image" defaultValue={hamster.image}/>
+          <label htmlFor="cuteness">Cuteness</label>
+          <input type="number" placeholder="cuteness" id="cuteness" name="cuteness" defaultValue={hamster.cuteness}/>
+          <label>Description</label>
+          <input type="text" placeholder="description" name="description" defaultValue={hamster.description}/>
+          <label>Breed</label>
+          <input type="text" placeholder="breed" name="breed" defaultValue={hamster.breed}/>
+          <button className="block w-full col-span-2" >Enviar</button>
+        </form>
+      )}
     </div>
    </main>
   )
