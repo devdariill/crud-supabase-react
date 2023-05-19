@@ -36,7 +36,7 @@ function App() {
     console.log(hamster)
     await createHamster(hamster)
   }
-  const [_hamster, setHamster] = useState({
+  const [hamster, setHamster] = useState({
     name: "",
     description: "",
     breed: "",
@@ -55,8 +55,15 @@ function App() {
       }
     })
   }
-  console.log(_hamster)
-
+  console.log(hamster)
+  
+  const deleteHamster = async hamster => {
+    console.log(hamster)
+    console.log("delete")
+    const res = await supabase.from(HAMSTERS).delete().match({id: hamster})
+    if (res.error) { console.log(res.error) , window.alert("error delete")}
+    getHamsters()
+  }
 
   {/* id: 1,
   created_at: '2023-05-19T04:18:21.758133+00:00',
@@ -93,18 +100,17 @@ function App() {
      {[...hamsters].reverse().map((item) => {
         return (
           <div key={item.id} className="relative w-full text-center max-w-screen-sm">
-            <button onClick={()=> console.log("delete")} className="absolute top-2 right-2 bg-red-500 px-2 rounded-full py-0.5 items-center justify-center text-center">X</button>
+            <button onClick={()=>deleteHamster(item.id)} type="button" className="absolute top-2 right-2 bg-red-500 px-2 rounded-full py-0.5 items-center justify-center text-center">X</button>
             <h1>{item.name}</h1>
             <p>{item.description}</p>
             <p>{item.breed}</p>
             <p>{item.cuteness}</p>
-            {!item.image.length>0 && <img src={item.image} alt={item.name} />}
+            {!item.image.length>0 && <img src={item.image} alt={item.name} />}            
           </div>
         )
         })
       }
     </div>
-
    </main>
   )
 }
