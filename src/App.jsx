@@ -32,9 +32,9 @@ function App() {
     const form = event.currentTarget
     console.log(form)
     const formData = new FormData(form)
-    console.log(formData)
     const hamster = Object.fromEntries(formData.entries())
     console.log(hamster)
+    await createHamster(hamster)
   }
 
   {/* id: 1,
@@ -50,20 +50,20 @@ function App() {
      {JSON.stringify(hamster)}
      <form onSubmit={handleSubmit}>
       <label htmlFor="name">Name</label>
-      <input type="text" placeholder="name" name="name" value="nameform"/>
+      <input type="text" placeholder="name" name="name" defaultValue="nameform"/>
       <label>
         Description
-        <input type="text" placeholder="description" name="description" value="desform"/>
+        <input type="text" placeholder="description" name="description" defaultValue="desform"/>
       </label>
       <label>
         Breed
-        <input type="text" placeholder="breed" name="breed" value="breedform"/>
+        <input type="text" placeholder="breed" name="breed" defaultValue="breedform"/>
       </label>
       <label htmlFor="image" >Image</label>
-      <input type="text" placeholder="image" name="image" value="imgform"/>
+      <input type="text" placeholder="image" name="image" defaultValue="imgform"/>
       <label>
         Cuteness
-        <input type="number" placeholder="cuteness" name="cuteness" value="6"/>
+        <input type="number" placeholder="cuteness" name="cuteness" defaultValue="6"/>
       </label>
       <button>Enviar</button>
      </form>
@@ -75,7 +75,7 @@ function App() {
         image: "image8.png",
         cuteness: 8
      })}>Create Hamster</button>
-     {hamster.map((item) => {
+     {[...hamster].reverse().map((item) => {
         return (
           <div key={item.id}>
             <h1>{item.name}</h1>
