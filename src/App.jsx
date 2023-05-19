@@ -22,6 +22,12 @@ function App() {
     getHamsters()
   },[])
 
+  const createHamster = async hamster => {
+    const res = await supabase.from(HAMSTERS).insert(hamster)
+    if (res.error) { console.log(res.error) , window.alert("error create")}
+    getHamsters()
+  }
+
   {/* id: 1,
   created_at: '2023-05-19T04:18:21.758133+00:00',
   name: 'afor',
@@ -33,6 +39,13 @@ function App() {
   return (
     <main>
      {JSON.stringify(hamster)}
+     <button onClick={()=>createHamster({
+        name: "8afor",
+        description: "8des afor",
+        breed: "breed8",
+        image: "image8.png",
+        cuteness: 8
+     })}>Create Hamster</button>
      {hamster.map((item) => {
         return (
           <div key={item.id}>
